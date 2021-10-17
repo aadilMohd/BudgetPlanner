@@ -80,35 +80,41 @@
 
 
     </div>
-
-
+    
+ 
 
     <div class="right">
+        <h2 class="text m-2">Sign up here</h2>
 
       <div class="containe m-5">
 
-        <h1 class="text" style="font-size: 50px;">Welcome</h1>
-        <br>
-        <h3 class="text">Login to your Account</h3>
-
-        <form class="m-5" action="/login" method="post">
+        <form class="m-5" action="/signupc" method="post">
           {% csrf_token %}
           <div class="mb-3">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="fname">
+          </div>
+          <div class="mb-3">
+            <label for="number" class="form-label">Phone Number</label>
+            <input type="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="number">
+          </div>
+          <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="uname">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="uemail">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" name="pass" id="exampleInputPassword1">
           </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" name="passc" id="exampleInputPassword1">
+          </div>
 
-          <button type="submit" class="btn btn-dark">Login</button>
+          <button type="submit" class="btn btn-dark">Signup</button>
           
         </form>
-
-        <p class="text ">If you are new here then click <a href="/signup">Sign up</a> </p>
-
       </div>
 
     </div>
