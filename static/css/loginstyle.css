@@ -20,8 +20,10 @@ html {
   .left {
     float: left;
     width: 500px;
-    height: 100%;
-    left: calc(50% - 490px/2 - 355px);
+    position: relative;
+    height: 100.5%;
+    right: calc(50% - 1265px/2);
+    /* left: calc(50% - 490px/2 - 355px); */
     top: calc(50% - 650px/2);
 
     background: #4CD4CA;
@@ -34,6 +36,12 @@ html {
     display: inline-block;
 margin: 0 auto;
 padding: 3px;
+  }
+
+  .logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .text{
