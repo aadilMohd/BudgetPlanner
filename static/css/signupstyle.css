@@ -1,42 +1,69 @@
-html {
-    background-color: #CEF3F1;
-  }
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
 
-  .mainframe {
+html{
+    margin: 0;
+    padding: 0;
+    background-color: #CEF3F1;
+    font-family: 'Philosopher', sans-serif;
+    letter-spacing: 1px;
+}
+
+.container{
     position: absolute;
-    width: 1200px;
-    height: 650px;
-    left: calc(50% - 1200px/2);
-    top: calc(50% - 650px/2);
-    display: flex;
-    flex-direction: row;
-    order: 2;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    bottom: 10%;
 
     background: #FFFFFF;
     border: 2px solid #000000;
     box-sizing: border-box;
+}
+
+.signup_form{
+    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: center;
+}
+
+.signup_form input{
+    display: block;
+    border: 2px solid rgba(160, 144, 144, 0.733);
+    border-radius: 25px;
+    width: 60%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    outline: none;
+}
+
+.signup_form input[type = "submit"]{
+    width: 100px;
+    color: #CEF3F1;
+    background-color: #307473;
+    border: 2px solid #000;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: bold;
   }
 
-  .left {
+.logo{
     float: left;
-    width: 500px;
+    position: relative;
+    width: 45%;
     height: 100%;
-    left: calc(50% - 490px/2 - 355px);
-    top: calc(50% - 650px/2);
-
-    background: #4CD4CA;
-    border: 2px solid #000000;
-    margin: 0%;
-    /* box-sizing: border-box; */
-
-  }
-  .right{
-    display: inline-block;
-margin: 0 auto;
-padding: 3px;
-  }
-
-  .text{
+}
+.img{
+    width: 100%;
+    height: 100%;
+    border-right: 2px solid #000000;
+}
+.text{
     text-align: center;
-    font-family:  Petrona;
   }

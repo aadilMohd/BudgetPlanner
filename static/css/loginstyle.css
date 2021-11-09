@@ -6,7 +6,6 @@ html{
   font-family: 'Philosopher', sans-serif;
   letter-spacing: 1px;
 }
-
 .container{
   position: absolute;
   width: 80%;
@@ -19,7 +18,6 @@ html{
   border: 2px solid #000000;
   box-sizing: border-box;
 }
-
 .login_form{
   margin-top: 5%;
   display: flex;
@@ -27,7 +25,6 @@ html{
   align-items: stretch;
   align-content: center;
 }
-
 .login_form input{
   display: block;
   border: 2px solid rgba(160, 144, 144, 0.733);
@@ -39,7 +36,6 @@ html{
   margin-right: auto;
   outline: none;
 }
-
 .login_form input[type = "submit"]{
   width: 100px;
   color: #CEF3F1;
@@ -51,7 +47,6 @@ html{
   font-family: 'Philosopher', sans-serif;
   font-weight: bold;
 }
-
 .logo{
   float: left;
   position: relative;
@@ -63,7 +58,6 @@ html{
   height: 100%;
   border-right: 2px solid #000000;
 }
-
 .text{
   text-align: center;
 }
