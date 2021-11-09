@@ -7,7 +7,7 @@
     <meta charset="utf-8">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../static/loginstyle.css">
+    <link rel="stylesheet" href="../static/css/loginstyle.css">
 
     <title>Welcome</title>
   </head>
@@ -25,17 +25,14 @@
             <h4 class="text" style="color: #808080">Please Sign in to your Account</h4>
 
             <form action="/login" method="post">
-              
               {% csrf_token %}
-              <input type="email" name="email" id="InputEmail" required placeholder = "Your Email">
-              {% comment %} <span class="hint" style="display: inline;">Enter your Email ID<span class="hint-pointer"></span></span> {% endcomment %}
-              <br>
-              <input type="password" name="password" id="InputPassword1" required placeholder = "Your Password">
-              <br>
-              <input type="submit" name="btn_signin" value="Sign In">
+              <input type="email" name="email" id="InputEmail" required placeholder = "&nbsp;Your Email">
+              <input type="password" name="password" id="InputPassword1" required placeholder = "&nbsp;Your Password">
+              <input type="submit" name="btn_signin" value="SIGN IN">
             </form>
 
-            <p class="text ">If you are new here then click <a href="/signup">Sign up</a></p>
+            <p class="text"><a href="/forgotpassword">Forgot Your Password?</a></p>
+            <p class="text"><a href="/signup">Don't have Account?...Sign up</a></p>
         </div>
       </div>
     </section>
