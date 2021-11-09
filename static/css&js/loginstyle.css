@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
+body{
+  margin: 0;
+  padding: 0;
+  background-color: #CEF3F1;
+  font-family: 'Philosopher', sans-serif;
+  letter-spacing: 1px;
+}
+
+.container{
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  bottom: 10%;
+  
+  background: #FFFFFF;
+  border: 2px solid #000000;
+  box-sizing: border-box;
+}
+
+.login_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input{
+  border-radius: 5px;
+  box-shadow: 1px 19px 38px rgb(0 0 0 / 30%), 1px 15px 12px rgb(0 0 0 / 22%);
+}
+
+.logo{
+  float: left;
+  position: relative;
+  width: 45%;
+  height: 100%;
+}
+.img{
+  width: 100%;
+  height: 100%;
+  border-right: 2px solid #000000;
+}
+
+.text{
+  text-align: center;
+}
