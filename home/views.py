@@ -1,48 +1,93 @@
+from django import http
+from django.http import request
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-
+from django.contrib.auth import authenticate, login, logout
 user_here=False
+user=None
+
+
+
+
+def loginUser(request):
+    email=request.POST['email']
+    passw = request.POST['password']
+    username = User.objects.get(email=email.lower()).username
+    user = authenticate(username=username, password=passw)
+    print(request.user.is_authenticated)
+    
+    if user is not None:
+        login(request, user)
+
+        return render(request,'Home/home.html')
+
+        # Redirect to a success page.
+        ...
+    else:
+        return render(request,'Home/login.html')
+        # Retur
+
+   
 
 def home(request):
-    if user_here:
-        return HttpResponse("Hi")
+    print(request.user.is_authenticated)
+    if request.user.is_authenticated:
+        return render(request,'Home/home.html')
+        
+      
     return render(request,'Home/login.html')
 
 
-def login(request):
-    usern=request.POST['uname']
-    passw = request.POST['pass']
-    user = authenticate(username=usern, password=passw)
-    if user is not None:
-        user_here=True
-        print(usern)
-        return HttpResponse("Logged in")
-
-    return HttpResponse("Not Logged in page")
+    # if request.user.is_authenticated():
+    #     return HttpResponse("User alrrady Logged in")
+    
 
 def signup(request):
 
     return render(request,'Home/signup.html')
 
+def logoutUser(request):
+    logout(request)
+    return redirect('/')
+
+
+
 def signupconfirm(request):
 
-    fullname= request.POST['fname']
-    phone= request.POST['number']
-    email= request.POST['uemail']
-    pass1= request.POST['pass']
-    pass2 = request.POST['passc']
+    fullname= request.POST['username']
+    phone= request.POST['phone']
+    email= request.POST['email']
+    pass1= request.POST['password']
+    pass2 = request.POST['confpassword']
 
     user = User.objects.create_user(fullname,email,pass1)
     user.phone=phone
     user.save()
 
+    login(request,user)
 
 
+    return redirect('/')
+def CheckemailView(request):
+    return render(request,'Home/forgotpass.html')
+def Checkemail(request):
+    email = request.POST['email']
+
+    try:
+
+        if User.objects.get(email=email):
+            return HttpResponse("email confirmed")
+        else:
+            return redirect('/signup')
+        
+    except:
     
+        return redirect('/signup')
 
+def forgotPass(request):
 
-    return HttpResponse("Signup Confirmed"+fullname)
+    return render(request,'Home/forgotpass.html')
+
 
 # Create your views here.
