@@ -9,7 +9,8 @@ user=None
 
 
 
-
+def ViewCalendar(request):
+    return render(request,'Home/calendar_quarter-year-view.html')
 def loginUser(request):
     email=request.POST['email']
     passw = request.POST['password']

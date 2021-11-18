@@ -1,26 +1,93 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="../static/css/css/bootstrap.css">
-    <link rel="stylesheet" href="../static/css/homestyle.css">
 
-    <title>Document</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+
+    <title>Home Page</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+    <script>
+        // Ignore this in your implementation
+        window.isMbscDemo = true;
+    </script>
+
+    <title>Quarter or year view</title>
+
+    <!-- Mobiscroll JS and CSS Includes -->
+    <link rel="stylesheet" href="{% static 'calcss/mobiscroll.javascript.min.css' %}">
+    <script src="{% static 'caljs/mobiscroll.javascript.min.js' %}"></script>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        button {
+            display: inline-block;
+            margin: 5px 5px 0 0;
+            padding: 10px 30px;
+            outline: 0;
+            border: 0;
+            cursor: pointer;
+            background: #5185a8;
+            color: #fff;
+            text-decoration: none;
+            font-family: arial, verdana, sans-serif;
+            font-size: 14px;
+            font-weight: 100;
+        }
+
+        input {
+            width: 100%;
+            margin: 0 0 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 0;
+            font-family: arial, verdana, sans-serif;
+            font-size: 14px;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+        }
+
+        .mbsc-page {
+            padding: 1em;
+        }
+
+        .mbsc-datepicker .quarter-year-header-picker .mbsc-segmented {
+            max-width: 280px;
+            margin: 0 auto;
+        }
+
+        .quarter-year-header-picker {
+            flex: 1 0 auto;
+        }
+    </style>
+
 </head>
+
 <body>
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">BudgetPlanner</a>
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -33,7 +100,8 @@
                             <a class="nav-link" href="#">Pricing</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Dropdown link
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -47,5 +115,113 @@
             </div>
         </nav>
     </section>
+
+    <section>
+
+        <div mbsc-page class="demo-quarter-year-view">
+            <div style="height:100%">
+                <div id="demo-quarter-year-view"></div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+
+
+    
+<script>
+
+    mobiscroll.setOptions({
+        locale: mobiscroll.localeEn,            // Specify language like: locale: mobiscroll.localePl or omit setting to use default
+        theme: 'ios',                           // Specify theme like: theme: 'ios' or omit setting to use default
+        themeVariant: 'light'                   // More info about themeVariant: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-themeVariant
+    });
+    
+    var selectedDate = new Date();
+    
+    var myCalendar = mobiscroll.datepicker('#demo-quarter-year-view', {
+        controls: ['calendar'],                 // More info about controls: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-controls
+        display: 'inline',                      // Specify display mode like: display: 'bottom' or omit setting to use default
+        calendarType: 'month',
+        calendarSize: 3,
+        showWeekNumbers: true,
+        renderCalendarHeader: function () {
+            return '<div mbsc-calendar-nav></div>' +
+                '<div class="quarter-year-header-picker">' +
+                '<label><input mbsc-segmented type="radio" name="view" value="q1" class="md-quarter-year-view-change">Q1</label>' +
+                '<label><input mbsc-segmented type="radio" name="view" value="q2" class="md-quarter-year-view-change">Q2</label>' +
+                '<label><input mbsc-segmented type="radio" name="view" value="q3" class="md-quarter-year-view-change">Q3</label>' +
+                '<label><input mbsc-segmented type="radio" name="view" value="q4" class="md-quarter-year-view-change">Q4</label>' +
+                '<label><input mbsc-segmented typce="radio" name="view" value="year" class="md-quarter-year-view-change">Year</label></div>' +
+                '<div mbsc-calendar-prev></div>' +
+                '<div mbsc-calendar-next></div>';
+        },
+        onPageChange: function (event, inst) {  // More info about onPageChange: https://docs.mobiscroll.com/5-12-1/javascript/calendar#event-onPageChange
+            selectedDate = event.firstDay;
+            setType(mobiscroll.getInst(document.querySelectorAll('.md-quarter-year-view-change[value="year"]')[0]).checked);
+        }
+    });
+    
+    function setType(yearView) {
+        var type = '';
+        if (yearView) {
+            type = 'year';
+        } else {
+            var month = selectedDate.getMonth();
+            if (month < 3) {
+                type = 'q1';
+            } else if (month < 6) {
+                type = 'q2';
+            } else if (month < 9) {
+                type = 'q3';
+            } else {
+                type = 'q4';
+            }
+        }
+        mobiscroll.getInst(document.querySelectorAll('.md-quarter-year-view-change[value=' + type + ']')[0]).checked = true;
+    }
+    
+    setTimeout(function () {
+        document.querySelectorAll('.md-quarter-year-view-change').forEach(function (elm) {
+            elm.addEventListener('change', function (ev) {
+                var year = selectedDate.getFullYear();
+                var type;
+                var date;
+    
+                switch (ev.target.value) {
+                    case 'q1':
+                        type = 'month';
+                        date = new Date(year, 0, 1);
+                        break;
+                    case 'q2':
+                        type = 'month';
+                        date = new Date(year, 3, 1);
+                        break;
+                    case 'q3':
+                        type = 'month';
+                        date = new Date(year, 6, 1);
+                        break;
+                    case 'q4':
+                        type = 'month';
+                        date = new Date(year, 9, 1);
+                        break;
+                    case 'year':
+                        type = 'year';
+                        date = new Date(year, selectedDate.getMonth(), 1);
+                        break;
+                }
+                myCalendar.setOptions({ calendarType: type });
+                myCalendar.navigate(date);
+            });
+        });
+        setType();
+    }, 1000);
+</script>
+
+
 </body>
+
 </html>
