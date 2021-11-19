@@ -15,6 +15,7 @@ urlpatterns = [
     path("checkemail",views.CheckemailView,name="checkemail"),
     path("checkemailc", views.Checkemail, name="checkemailconfirm"),
     path("forgotpass",views.forgotPass,name="forgotpass"),
-    path("calendar",views.ViewCalendar,name="Calender")
+    path("calendar",views.ViewCalendar,name="Calender"),
+    path("details/<slug:slug>",views.DetailsView,name="Details")
 
 ]

@@ -8,6 +8,9 @@ user_here=False
 user=None
 
 
+def DetailsView(self,slug):
+
+    return HttpResponse("hi"+slug)
 
 def ViewCalendar(request):
     return render(request,'Home/calendar_quarter-year-view.html')
@@ -34,7 +37,7 @@ def loginUser(request):
 def home(request):
     print(request.user.is_authenticated)
     if request.user.is_authenticated:
-        return render(request,'Home/home.html')
+        return render(request,'Home/home.html',{"ex":[[2021,6,6],[2021,6,7],[2021,5,3]]})
         
       
     return render(request,'Home/login.html')

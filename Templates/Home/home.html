@@ -114,7 +114,18 @@
         </nav>
     </section>
 
-    <section>
+    <div  style="width: 100; height: 100;">
+
+    <h1>The current month:
+    
+    
+    
+    
+    
+    </h1>
+    </div>
+
+
 
         <div mbsc-page class="demo-quarter-year-view">
             <div style="height:100%">
@@ -123,7 +134,7 @@
         </div>
 
 
-    </section>
+ 
 
 
 
@@ -131,11 +142,30 @@
 
     
 <script>
+   var colist=[]
+   var date;
+ {% for  i in ex %}
+        var x={{i}};
+        colist.push({
+            
+                date:new Date(x[0],x[1],x[2]),
+                highlight:'#f3a146'
+            
+
+        })
+    {% endfor %}
+
+   
 
     mobiscroll.setOptions({
         locale: mobiscroll.localeEn,            // Specify language like: locale: mobiscroll.localePl or omit setting to use default
         theme: 'ios',                           // Specify theme like: theme: 'ios' or omit setting to use default
-        themeVariant: 'light'                   // More info about themeVariant: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-themeVariant
+        themeVariant: 'light'   ,
+                        // More info about themeVariant: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-themeVariant
+        colors:colist
+
+        
+
     });
     
     var selectedDate = new Date();
@@ -144,7 +174,7 @@
         controls: ['calendar'],                 // More info about controls: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-controls
         display: 'inline',                      // Specify display mode like: display: 'bottom' or omit setting to use default
         calendarType: 'month',
-        calendarSize: 3,
+        calendarSize: 6,
         showWeekNumbers: true,
         renderCalendarHeader: function () {
             return '<div mbsc-calendar-nav></div>' +
@@ -160,8 +190,19 @@
         onPageChange: function (event, inst) {  // More info about onPageChange: https://docs.mobiscroll.com/5-12-1/javascript/calendar#event-onPageChange
             selectedDate = event.firstDay;
             setType(mobiscroll.getInst(document.querySelectorAll('.md-quarter-year-view-change[value="year"]')[0]).checked);
+        },
+        onCellClick: function (event, inst){
+            console.log(event.date);
+            var dateString = event.date;
+           var dateList =String(dateString).split(" ")
+           var slug=String(dateList[0])+"-"+String(dateList[1])+"-"+String(dateList[2]+"-"+String(dateList[3]))
+            window.location.replace("/details/"+ slug)
         }
+        
+
     });
+
+    
     
     function setType(yearView) {
         var type = '';
@@ -217,6 +258,8 @@
         });
         setType();
     }, 1000);
+
+  
 </script>
 
 
