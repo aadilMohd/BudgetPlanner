@@ -16,11 +16,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <script>
-        // Ignore this in your implementation
-        window.isMbscDemo = true;
-    </script>
-
     <title>Quarter or year view</title>
 
     <!-- Mobiscroll JS and CSS Includes -->
@@ -77,6 +72,7 @@
 </head>
 
 <body>
+<!--Navigation Bar-->
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
@@ -92,21 +88,10 @@
                             <a class="nav-link active" aria-current="page" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                            <a class="nav-link" href="#">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown link
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
+                            <a class="nav-link" href="#">Monthy Expenses</a>
                         </li>
                     </ul>
                 </div>
@@ -114,32 +99,12 @@
         </nav>
     </section>
 
-    <div  style="width: 100; height: 100;">
-
-    <h1>The current month:
-    
-    
-    
-    
-    
-    </h1>
-    </div>
-
-
-
-        <div mbsc-page class="demo-quarter-year-view">
-            <div style="height:100%">
-                <div id="demo-quarter-year-view"></div>
-            </div>
+    <!--Calendar-->
+    <div mbsc-page class="demo-quarter-year-view">
+        <div style="height:100%">
+            <div id="demo-quarter-year-view"></div>
         </div>
-
-
- 
-
-
-
-
-
+    </div>
     
 <script>
    var colist=[]
@@ -161,10 +126,7 @@
         locale: mobiscroll.localeEn,            // Specify language like: locale: mobiscroll.localePl or omit setting to use default
         theme: 'ios',                           // Specify theme like: theme: 'ios' or omit setting to use default
         themeVariant: 'light'   ,
-                        // More info about themeVariant: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-themeVariant
         colors:colist
-
-        
 
     });
     
@@ -174,18 +136,10 @@
         controls: ['calendar'],                 // More info about controls: https://docs.mobiscroll.com/5-12-1/javascript/calendar#opt-controls
         display: 'inline',                      // Specify display mode like: display: 'bottom' or omit setting to use default
         calendarType: 'month',
-        calendarSize: 6,
+        calendarSize: 12,
         showWeekNumbers: true,
         renderCalendarHeader: function () {
-            return '<div mbsc-calendar-nav></div>' +
-                '<div class="quarter-year-header-picker">' +
-                '<label><input mbsc-segmented type="radio" name="view" value="q1" class="md-quarter-year-view-change">Q1</label>' +
-                '<label><input mbsc-segmented type="radio" name="view" value="q2" class="md-quarter-year-view-change">Q2</label>' +
-                '<label><input mbsc-segmented type="radio" name="view" value="q3" class="md-quarter-year-view-change">Q3</label>' +
-                '<label><input mbsc-segmented type="radio" name="view" value="q4" class="md-quarter-year-view-change">Q4</label>' +
-                '<label><input mbsc-segmented typce="radio" name="view" value="year" class="md-quarter-year-view-change">Year</label></div>' +
-                '<div mbsc-calendar-prev></div>' +
-                '<div mbsc-calendar-next></div>';
+            return '<div mbsc-calendar-nav></div>';
         },
         onPageChange: function (event, inst) {  // More info about onPageChange: https://docs.mobiscroll.com/5-12-1/javascript/calendar#event-onPageChange
             selectedDate = event.firstDay;
@@ -197,8 +151,7 @@
            var dateList =String(dateString).split(" ")
            var slug=String(dateList[0])+"-"+String(dateList[1])+"-"+String(dateList[2]+"-"+String(dateList[3]))
             window.location.replace("/details/"+ slug)
-        }
-        
+        }        
 
     });
 
