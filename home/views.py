@@ -4,13 +4,44 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from .models import Budget
 user_here=False
 user=None
 
+mondict={
+    "Jan":1,
+    "Feb":2,
+    "Mar":3,
+    "Apr":4,
+    "May":5,
+    "Jun":6,
+    "Jul":7,
+    "Aug":8,
+    "Sep":9,
+    "Oct":10,
+    "Nov":11,
+    "Dec":12
+}
 
-def DetailsView(self,slug):
+def DetailsView(request,slug):
 
-    return HttpResponse("hi"+slug)
+    givendate=slug.split("-")
+    monthString=givendate[1]
+    day=givendate[2]
+    year=givendate[3]
+    month=mondict[monthString]
+
+    searchdate = year+'-'+str(month)+'-'+day
+    current_user = request.user
+
+    spends = Budget.objects.filter(user=current_user,date=searchdate)
+    cost=0
+    for x in spends:
+        cost+=x.cost
+    print(spends,current_user)
+
+
+    return render(request,"Home/list.html",{"slug":cost})
 
 def ViewCalendar(request):
     return render(request,'Home/calendar_quarter-year-view.html')
@@ -37,7 +68,16 @@ def loginUser(request):
 def home(request):
     print(request.user.is_authenticated)
     if request.user.is_authenticated:
-        return render(request,'Home/home.html',{"ex":[[2021,6,6],[2021,6,7],[2021,5,3]]})
+        dates=[]
+        dateset= Budget.objects.filter(user=request.user)
+        for d in dateset:
+            dates.append(str(d.date).split('-'))
+        print(dates)
+        context={
+            "message":"hi",
+            "dates":dates
+        }
+        return render(request,'Home/home.html',context)
         
       
     return render(request,'Home/login.html')
