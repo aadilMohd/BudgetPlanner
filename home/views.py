@@ -24,12 +24,12 @@ def loginUser(request):
     if user is not None:
         login(request, user)
 
-        return render(request,'Home/home.html')
+        return redirect("/")
 
         # Redirect to a success page.
         ...
     else:
-        return render(request,'Home/login.html')
+        return redirect("/")
         # Retur
 
    
