@@ -4,7 +4,12 @@ from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Budget
+from .models import Budget, PieChart
+import matplotlib
+from matplotlib import pyplot as plt
+import random
+from django.core.files.base import ContentFile
+import io
 user_here=False
 user=None
 
@@ -22,6 +27,37 @@ mondict={
     "Nov":11,
     "Dec":12
 }
+
+# Pie Chart
+def piechart(request):
+    # Pie chart, where the slices will be ordered and plotted counter-clockwise:
+    allfigureobjects = PieChart.objects.filter(user=request.user)
+    for fig in allfigureobjects:
+        if fig.figure:
+            fig.figure.delete()
+        fig.delete()
+    
+
+    labels = 'X', 'Y'
+    sizes = [10, 10]
+    explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    f=io.BytesIO()
+    plt.savefig(f)
+    content_file = ContentFile(f.getvalue())
+    model_object = PieChart.objects.create(user=request.user)
+   
+    model_object.figure.save('chart1', content_file)
+    model_object.save()
+
+    figureurl =PieChart.objects.filter(user=request.user).first().figure
+  
+    return render(request,'Home/piechart.html',{"figureurl":figureurl})
+
 
 def DetailsView(request,slug):
 
@@ -45,6 +81,7 @@ def DetailsView(request,slug):
 
 def ViewCalendar(request):
     return render(request,'Home/calendar_quarter-year-view.html')
+
 def loginUser(request):
     email=request.POST['email']
     passw = request.POST['password']
@@ -62,8 +99,6 @@ def loginUser(request):
     else:
         return redirect("/")
         # Retur
-
-   
 
 def home(request):
     print(request.user.is_authenticated)
@@ -110,24 +145,35 @@ def signupconfirm(request):
     user.save()
 
     login(request,user)
-
-
     return redirect('/')
+
 def CheckemailView(request):
     return render(request,'Home/forgotpass.html')
+
 def Checkemail(request):
     email = request.POST['email']
-
     try:
-
         if User.objects.get(email=email):
-            return HttpResponse("email confirmed")
+            return render(request,'Home/changepass.html')
         else:
             return redirect('/signup')
         
     except:
     
         return redirect('/signup')
+
+def changepass(request):
+    email=request.POST['email']
+    newpass=request.POST['newpass']
+    newpassc = request.POST['newpassc']
+    print(email,newpass,newpassc)
+    if(newpass==newpassc):
+        user= User.objects.get(email=email)
+        user.set_password(newpass)
+        user.save()
+        return redirect('/')
+    else:
+        return HttpResponse("Passwords don't match")
 
 def forgotPass(request):
 

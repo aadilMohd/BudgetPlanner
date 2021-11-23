@@ -16,6 +16,8 @@ urlpatterns = [
     path("checkemailc", views.Checkemail, name="checkemailconfirm"),
     path("forgotpass",views.forgotPass,name="forgotpass"),
     path("calendar",views.ViewCalendar,name="Calender"),
-    path("details/<slug:slug>",views.DetailsView,name="Details")
+    path("details/<slug:slug>",views.DetailsView,name="Details"),
+    path("resetpassword/",views.changepass,name="changepass"),
+    path('pie',views.piechart,name="pie")
 
 ]

@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+
+    <title>Welcome</title>
+  </head>
+
+  <body>
+    <section>
+      <div class = "container">
+
+        <div class = "logo">
+          <img class = "img" src="{% static 'images/logo.png' %}" alt = "logo">
+        </div>
+
+        <div class="login_form">
+            <h1 class="text" style="color: #153734; font-size:45px;">Reset Password</h1>
+           
+            <form action="resetpassword/" method="post">
+              {% csrf_token %}
+               <input type="email" name="email" id="InputEmail" required placeholder = "&nbsp;Enter Email">
+              <input type="Password" name="newpass" id="InputNewPassword" required placeholder = "&nbsp;Enter New Password">
+              <input type="Password" name="newpassc" id="InputNewPassword" required placeholder = "&nbsp;Renter New Password">
+              <input type="submit" name="btn_reset" value="Submit">
+            </form>
+
+           
+            <p class="text"><a href="/signup">Don't have Account?...Sign up</a></p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
