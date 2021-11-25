@@ -19,7 +19,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #CEF3F1;">
 <!--Navigation Bar-->
     <section>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -48,18 +48,54 @@
     </section>
 
     <!--DATE-->
-   <section>
-   <h1>{{slug}}</h1>
-   <div class="card">
-    <div class="card-body">
-      This is some text within a card body.
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      This is some text within a card body.
-    </div>
-  </div>
-   </section>
- </body>
+    <section>
+
+        <div class="add_btn" style=
+            "display: flex;
+            align-content: flex-end;
+            justify-content: flex-end;
+            align-items: center;
+            margin: 25px">
+            
+            <img src="../images/add.png"></>
+
+        </div>
+
+        <div class = "table" style="
+            background-color: #CEF3F1;
+            display: flex;
+            align-content: center;
+            justify-content: space-evenly;
+            align-items: stretch;
+            margin-top: 15px">
+
+            <table class="table table-striped" style="width:85%">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr. No.</th>
+                        <th scope="col">Item Description</th>
+                        <th scope="col">Ammount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                            <td>TestData1</td>
+                            <td>2500</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                            <td>TestData2</td>
+                            <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp</td>
+                        <th scope="row" style="text-align: right;">TOTAL:</th>
+                        <td>{{slug}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
 </html>
