@@ -57,7 +57,7 @@
             align-items: center;
             margin: 25px">
             
-            <img src="{% static 'images/add.png' %}"  width="50" height="50"><img/>
+            <img src="{% static 'images/add.png' %}" id="addbutton"  width="50" height="50" onClick="toAddPage()"><img/>
 
         </div>
 
@@ -97,5 +97,12 @@
             </table>
         </div>
     </section>
+
+    <script>
+        function toAddPage(){
+            
+             window.location.replace("/add");
+        }
+    </script>
 </body>
 </html>

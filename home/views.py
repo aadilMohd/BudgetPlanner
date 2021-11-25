@@ -29,6 +29,9 @@ mondict={
     "Dec":12
 }
 
+def addpageview(request):
+    return render(request,'Home/addpage.html')
+
 # Pie Chart
 def piechart(request):
     # Pie chart, where the slices will be ordered and plotted counter-clockwise:
