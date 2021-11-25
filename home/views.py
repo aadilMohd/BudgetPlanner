@@ -86,7 +86,13 @@ def ViewCalendar(request):
 def loginUser(request):
     email=request.POST['email']
     passw = request.POST['password']
-    username = User.objects.get(email=email.lower()).username
+    try:
+        username = User.objects.get(email=email.lower()).username
+    except:
+        messages.error(request,"Email Doesn't exist, Sign up to create an account")
+        return redirect("/")
+
+
     user = authenticate(username=username, password=passw)
     print(request.user.is_authenticated)
     
@@ -98,7 +104,7 @@ def loginUser(request):
         # Redirect to a success page.
         ...
     else:
-        messages.error(request,"Incorrect Password")
+        messages.error(request,"Incorrect Password, Please type the password corectly")
         return redirect("/")
         # Retur
 
@@ -156,16 +162,16 @@ def Checkemail(request):
     email = request.POST['email']
     try:
         if User.objects.get(email=email):
-            messages.error(request,"Email Confirmed")
+            messages.error(request,"Email Confirmed, You can change your password")
             return render(request,'Home/changepass.html')
         else:
-            messages.error(request,"Email Doesn't exist")
+            messages.error(request,"Email Doesn't exist, Sign up to create an account")
 
             return redirect('/signup')
         
     except:
-
-        messages.error(request,"Email Doesn't exist")
+        messages.error(request,"Email Doesn't exist, Sign up to create an account")
+      
     
         return redirect('/signup')
 
@@ -178,10 +184,10 @@ def changepass(request):
         user= User.objects.get(email=email)
         user.set_password(newpass)
         user.save()
-        messages.error(request,"Password Changed")
+        messages.error(request,"Password Changed, Login with your new password")
         return redirect('/')
     else:
-        messages.error(request,"Password Don't match")
+        messages.error(request,"Passwords Don't match, please enter again")
         return redirect("/resetpassword")
 
 def forgotPass(request):
