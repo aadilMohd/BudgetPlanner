@@ -81,7 +81,7 @@ def DetailsView(request,slug):
     print(spends,current_user)
 
 
-    return render(request,"Home/list.html",{"slug":cost})
+    return render(request,"Home/list.html",{"total":cost,"spends":spends})
 
 def ViewCalendar(request):
     return render(request,'Home/calendar_quarter-year-view.html')

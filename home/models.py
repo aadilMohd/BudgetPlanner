@@ -10,6 +10,7 @@ class Budget(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateField(null=False)
     category = models.CharField(max_length=100,null=False)
+    description = models.CharField(max_length=100,null=True)
     cost = models.IntegerField(null=False)
 
 class PieChart(models.Model):
