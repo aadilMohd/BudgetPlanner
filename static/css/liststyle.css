@@ -8,3 +8,7 @@ html{
 }
 
 
+#addbutton:hover{
+    
+    cursor: pointer;
+}
