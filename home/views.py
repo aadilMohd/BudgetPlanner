@@ -9,6 +9,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 import random
 from django.core.files.base import ContentFile
+from django.contrib import messages
 import io
 user_here=False
 user=None
@@ -97,6 +98,7 @@ def loginUser(request):
         # Redirect to a success page.
         ...
     else:
+        messages.error(request,"Incorrect Password")
         return redirect("/")
         # Retur
 
@@ -154,11 +156,16 @@ def Checkemail(request):
     email = request.POST['email']
     try:
         if User.objects.get(email=email):
+            messages.error(request,"Email Confirmed")
             return render(request,'Home/changepass.html')
         else:
+            messages.error(request,"Email Doesn't exist")
+
             return redirect('/signup')
         
     except:
+
+        messages.error(request,"Email Doesn't exist")
     
         return redirect('/signup')
 
@@ -171,9 +178,11 @@ def changepass(request):
         user= User.objects.get(email=email)
         user.set_password(newpass)
         user.save()
+        messages.error(request,"Password Changed")
         return redirect('/')
     else:
-        return HttpResponse("Passwords don't match")
+        messages.error(request,"Password Don't match")
+        return redirect("/resetpassword")
 
 def forgotPass(request):
 

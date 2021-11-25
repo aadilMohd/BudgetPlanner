@@ -2,39 +2,49 @@
 <!doctype html>
 
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href= "{% static 'css/loginstyle.css' %}">
-    
-    <title>Welcome</title>
-  </head>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
 
-  <body>
-    <section>
-      <div class = "container">
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-        <div class = "logo">
-          <img class = "img" src="{% static 'images/logo.png' %}" alt = "logo">
-        </div>
+  <title>Welcome</title>
+</head>
 
-        <div class="login_form">
-            <h1 class="text" style="color: #153734; font-size:45px;">SIGN IN</h1>
-            <h4 class="text" style="color: #808080">Please Sign in to your Account</h4>
 
-            <form action="/login" method="post">
-              {% csrf_token %}
-              <input type="email" name="email" id="InputEmail" required placeholder = "&nbsp;Your Email">
-              <input type="password" name="password" id="InputPassword" required placeholder = "&nbsp;Your Password">
-              <input type="submit" name="btn_signin" value="SIGN IN">
-            </form>
+<body>
+  {% include 'Home/message.html' %}
 
-            <p class="text"><a href="/checkemail">Forgot Your Password?</a></p>
-            <p class="text"><a href="/signup">Don't have Account?...Sign up</a></p>
-        </div>
+  <section>
+    <div class="container">
+
+      <div class="logo">
+        <img class="img" src="{% static 'images/logo.png' %}" alt="logo">
       </div>
-    </section>
-  </body>
+
+      <div class="login_form">
+        <h1 class="text" style="color: #153734; font-size:45px;">SIGN IN</h1>
+        <h4 class="text" style="color: #808080">Please Sign in to your Account</h4>
+
+
+
+        <form action="/login" method="post">
+          {% csrf_token %}
+          <input type="email" name="email" id="InputEmail" required placeholder="&nbsp;Your Email">
+          <input type="password" name="password" id="InputPassword" required placeholder="&nbsp;Your Password">
+          <input type="submit" name="btn_signin" value="SIGN IN">
+        </form>
+
+        <p class="text"><a href="/checkemail">Forgot Your Password?</a></p>
+        <p class="text"><a href="/signup">Don't have Account?...Sign up</a></p>
+      </div>
+    </div>
+  </section>
+</body>
+
 </html>
