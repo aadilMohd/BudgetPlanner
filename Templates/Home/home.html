@@ -161,8 +161,12 @@
             console.log(event.date);
             var dateString = event.date;
            var dateList =String(dateString).split(" ")
-           var slug=String(dateList[0])+"-"+String(dateList[1])+"-"+String(dateList[2]+"-"+String(dateList[3]))
-            window.location.replace("/details/"+ slug)
+           {% comment %} alert("hi"); {% endcomment %}
+           var date=String(dateList[0])+"-"+String(dateList[1])+"-"+String(dateList[2]+"-"+String(dateList[3]))
+
+
+           
+            window.location.replace("/details/"+ date)
         }        
 
     });

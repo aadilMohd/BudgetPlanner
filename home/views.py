@@ -51,6 +51,39 @@ def addtodb(request,slug):
 
     return redirect('/details/'+slug)
 
+def piechartdata(request):
+
+    objects = Budget.objects.filter(user=request.user)
+
+    categories=['food','clothes','groceries','essentials','others']
+    categoriescount=[0,0,0,0,0]
+    for ob in objects:
+       
+        if ob.category.lower() == 'food':
+            categoriescount[0]+=ob.cost
+        elif ob.category.lower() == 'clothes':
+            categoriescount[1]+=ob.cost
+        elif ob.category.lower() == 'groceries':
+            categoriescount[2]+=ob.cost
+        elif ob.category.lower() == 'essesntials':
+            categoriescount[3]+=ob.cost
+        else:
+            categoriescount[4]+=ob.cost
+
+
+      
+    catfinal = [categories[x] for x in range(len(categories)) if categoriescount[x]!=0]
+    countfinal = [x for x in categoriescount if x !=0]
+    print(categories,catfinal)
+    print(categoriescount,countfinal)
+
+
+    return {'categories':catfinal,'count':countfinal}
+
+
+        
+    
+
 def addpageview(request,slug):
     return render(request,'Home/addpage.html',{"slug":slug})
 
@@ -63,15 +96,18 @@ def piechart(request):
             fig.figure.delete()
         fig.delete()
     
+    piechartdetails=piechartdata(request)
+    print(piechartdetails)
 
-    labels = 'X', 'Y'
-    sizes = [10, 10]
-    explode = (0.1, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+    labels = piechartdetails['categories']
+    sizes = piechartdetails['count']
+    explode = (0.1, 0,0,0,0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 
-    fig1, ax1 = plt.subplots()
-    ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-            shadow=True, startangle=90)
-    ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    # fig1, ax1 = plt.subplots()
+    fig1 = plt.figure()
+    ax1 = fig1.add_axes([0,0,1,1])
+    ax1.pie(sizes, labels=labels, autopct='%1.1f%%')
+      # Equal aspect ratio ensures that pie is drawn as a circle.
     f=io.BytesIO()
     plt.savefig(f)
     content_file = ContentFile(f.getvalue())
