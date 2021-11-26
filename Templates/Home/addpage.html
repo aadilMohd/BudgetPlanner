@@ -27,25 +27,39 @@
                 align-items: center;
                 flex-direction: column;">
 
-                <form style="margin: 15px">
+                <form style="margin: 15px" action="/adddb/{{slug}}" method="get">
+                {% csrf_token %}
+
                     <div class="form-group">
                         <label for="ItemDescriptionInput" style="font-family: 'Philosopher', sans-serif;">Item Description</label>
-                        <input type="text" class="form-control" id="ItemDescriptionInput" placeholder="Enter Item Description"
+                        <input type="text" name="description" class="form-control" id="ItemDescriptionInput" placeholder="Enter Item Description"
                         style="font-family: 'Philosopher', sans-serif;">
                     </div>
                     <div class="form-group">
                         <label for="CategoryInput" style="font-family: 'Philosopher', sans-serif;">Category</label>
-                        <input type="text" class="form-control" id="CategoryInput" placeholder="Enter Category"
+                        <input type="text"  name="category" class="form-control" id="CategoryInput" placeholder="Enter Category"
                         style="font-family: 'Philosopher', sans-serif;">
                     </div>
                     <div class="form-group">
                         <label for="AmountInput" style="font-family: 'Philosopher', sans-serif;">Amount</label>
-                        <input type="number" class="form-control" id="AmountInput" placeholder="Enter Amount"
+                        <input type="number"  name="amount" class="form-control" id="AmountInput" placeholder="Enter Amount"
                         style="font-family: 'Philosopher', sans-serif;">
                     </div>
-                    <button type="submit" class="btn btn-primary" style="font-family: 'Philosopher', sans-serif; margin-top: 5px">ADD</button>
+                    <input type="submit" class="btn btn-primary" style="font-family: 'Philosopher', sans-serif; margin-top: 5px" value="Add"/>
                 </form>
         </div>
     </section>
+    <script>
+
+        function toAddPage(){
+            var dateList= {{datelist|safe}}
+
+            var date=String(dateList[0])+"-"+String(dateList[1])+"-"+String(dateList[2]+"-"+String(dateList[3]))
+
+            return "/adddb"+date
+
+        }
+    </script>
 </body>
+
 </html>

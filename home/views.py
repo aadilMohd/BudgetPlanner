@@ -29,8 +29,30 @@ mondict={
     "Dec":12
 }
 
-def addpageview(request):
-    return render(request,'Home/addpage.html')
+def addtodb(request,slug):
+
+    givendate=slug.split("-")
+    monthString=givendate[1]
+    day=givendate[2]
+    year=givendate[3]
+    month=mondict[monthString]
+
+    searchdate = year+'-'+str(month)+'-'+day
+
+
+    desc=request.GET['description']
+    category=request.GET['category']
+    cost=request.GET['amount']
+
+    ob = Budget(id=random.randint(1,7555555),user=request.user,date=searchdate,category=category,description=desc,cost=cost)
+    ob.save()
+
+
+
+    return redirect('/details/'+slug)
+
+def addpageview(request,slug):
+    return render(request,'Home/addpage.html',{"slug":slug})
 
 # Pie Chart
 def piechart(request):
@@ -79,9 +101,10 @@ def DetailsView(request,slug):
     for x in spends:
         cost+=x.cost
     print(spends,current_user)
+   
 
 
-    return render(request,"Home/list.html",{"total":cost,"spends":spends})
+    return render(request,"Home/list.html",{"total":cost,"spends":spends,"datelist":slug.split('-')})
 
 def ViewCalendar(request):
     return render(request,'Home/calendar_quarter-year-view.html')

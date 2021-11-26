@@ -19,6 +19,7 @@ urlpatterns = [
     path("details/<slug:slug>",views.DetailsView,name="Details"),
     path("resetpassword/",views.changepass,name="changepass"),
     path('pie',views.piechart,name="pie"),
-    path('add',views.addpageview,name="Add Page")
+    path('add/<slug:slug>',views.addpageview,name="Add Page"),
+    path('adddb/<slug:slug>',views.addtodb,name="Add Page")
 
 ]

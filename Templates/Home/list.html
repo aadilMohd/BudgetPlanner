@@ -105,8 +105,12 @@
 
     <script>
         function toAddPage(){
+            var dateList={{datelist|safe}}
+
+           var date=String(dateList[0])+"-"+String(dateList[1])+"-"+String(dateList[2]+"-"+String(dateList[3]))
+            alert(date);
             
-             window.location.replace("/add");
+             window.location.replace("/add/"+date);
         }
     </script>
 </body>
