@@ -69,8 +69,6 @@ def piechartdata(request):
             categoriescount[3]+=ob.cost
         else:
             categoriescount[4]+=ob.cost
-
-
       
     catfinal = [categories[x] for x in range(len(categories)) if categoriescount[x]!=0]
     countfinal = [x for x in categoriescount if x !=0]
@@ -81,8 +79,6 @@ def piechartdata(request):
     return {'categories':catfinal,'count':countfinal}
 
 
-        
-    
 
 def addpageview(request,slug):
     return render(request,'Home/addpage.html',{"slug":slug})
