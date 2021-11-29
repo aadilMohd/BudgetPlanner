@@ -10,6 +10,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+    <script src="{% static 'js/bootstrap.js' %}"></script>
 
     <title>Home Page</title>
 
@@ -88,10 +89,15 @@
                             <a class="nav-link active" aria-current="page" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Category</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="#">Monthy Expenses</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              User
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                              <a class="dropdown-item" href="#">LogOut</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
