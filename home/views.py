@@ -29,6 +29,11 @@ mondict={
     "Dec":12
 }
 
+
+def expenseview(request):
+
+    return render(request,'Home/expensepage.html')
+
 def addtodb(request,slug):
 
     givendate=slug.split("-")
